@@ -1,0 +1,153 @@
+ls                 # to show the list of items in current directory
+ls -l              # Detailed listing
+ls -a              # Show hidden files
+ls -lart           # to get info about permissions
+
+
+
+cd /path/to/dir    # Change directory
+cd ..              # Go up one directory
+cd ../             # to move to root directory
+
+
+pwd                # to show the path of current directory
+
+
+mkdir              # to create a directory
+rmdir              # to remove a directory
+rm -r dir_name     # Remove directory with files
+rm file.txt        # Delete file
+
+
+touch file.txt     # Create empty file
+cp file1 file2     # Copy file
+cp -r dir1 dir2    # Copy directory
+mv file1 newname   # Rename/move file or       mv file1 folder/file1
+
+
+vim main.py         # terminal editor (to create and manipulate files)
+i                   # Enter insert mode (start typing)
+Esc                 # Return to normal mode
+:w                  # Save (write)
+:q                  # Quit
+:wq                 # Save and quit
+:q!                 # Quit without saving
+dd                  # Delete line
+yy                  # Copy line
+p                   # Paste line
+
+
+nano file.txt       # terminal editor (to create and manipulate files)
+Ctrl + O            # Save (write out)
+Ctrl + X            # Exit
+Ctrl + K            # Cut line
+Ctrl + U            # Paste line
+Ctrl + W            # Search
+
+
+cat file.txt       # View file content
+less file.txt      # View file page by page
+head file.txt      # First 10 lines
+tail file.txt      # Last 10 lines
+tail -f logfile    # Watch live logs
+
+man ls             # to get all info about ls command
+
+
+chmod              # Change permissions (rwxr-xr-x)
+  eg: chmod 744 file.txt 
+
+chown              # Change ownership
+  eg: chown newuser file.txt
+  eg: chown newuser:newgroup file.txt
+
+
+sudo apt update                # Update package list
+sudo apt upgrade               # Upgrade packages
+sudo apt install pkg_name      # Install package
+sudo apt remove pkg_name       # Remove package
+dpkg -l                        # List installed packages
+
+
+tar                # create or extract compressed archieved files
+tar cf hello.tar hello.py main.py 
+will create a tar file , a compressed combination of 2 files
+
+# x: extract files from an archive
+# t: list the contents of an archive
+# r: append files to an existing archive
+# z: use gzip compression
+# j: use bzip2 compression
+# cf: create file
+# xf: extract file
+
+tar -xvf files.tar             # Extract tar
+
+zip file.zip file1 file2       # Zip files
+unzip file.zip                 # Unzip
+
+
+gzip file.txt      # to compress a file
+gunzip file.txt    # to decompress a file
+
+
+ssh username@server_address   # will direct you to other server
+
+scp myfile.txt user@remotehost:/home/user/    # to copy a file from one server to other
+
+
+
+ifconfig           # display or configure network interfaces
+
+netstat            # display network connection information
+
+route              # view or configure network routing tables
+
+top                # display system resource usage and processes
+
+htop               # to get view of all running processes
+
+ps                 # display information about running processes
+
+ps -ef             # detailed
+
+ps -ef | grep init   # grep used for searching specific process
+
+kill processid    # to kill a process
+
+ps aux            # Show all processes
+kill 1234         # Kill process by PID
+kill -9 1234      # Force kill
+jobs              # List background jobs
+bg                # Resume job in background
+fg                # Resume job in foreground
+
+
+
+find / -name file.txt         # Find file by name
+find . -type f -name "*.py"   # Find Python files
+grep "keyword" file.txt       # Search inside file
+grep -r "keyword" path        # Search recursively
+
+
+uname -a          # Kernel info
+hostname          # System hostname
+uptime            # System running time
+df -h             # Disk usage
+du -sh *          # Folder sizes
+free -h           # Memory usage
+whoami            # Current user
+id                # User ID and groups
+which ls          # tells folder of pkg 
+finger username   # to get info about other users
+locate filename   # to find the file in directory
+sort filename     # will sort elements in the file
+uniq filename     # will give unique values from file
+
+adduser newuser   # Add new user
+passwd username   # Change password
+userdel username  # Delete User
+su - username     # Switch user
+
+
+

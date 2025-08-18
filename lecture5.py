@@ -12,7 +12,7 @@ while True:
 
 
 
-# TOPICS :    1.JOB CONTROL           2.TERMINAL MULTIPLEXER         3.DOT FILES   4.REMOTE MACHINES
+# TOPICS :    1.JOB CONTROL           2.TERMINAL MULTIPLEXER         3.DOT FILES        4.REMOTE MACHINES
 #     Sessions > Windows > Panes
 
 
