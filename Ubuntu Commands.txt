@@ -70,7 +70,9 @@ dpkg -l                        # List installed packages
 
 
 tar                # create or extract compressed archieved files
+
 tar cf hello.tar hello.py main.py 
+
 will create a tar file , a compressed combination of 2 files
 
 # x: extract files from an archive
@@ -149,5 +151,27 @@ passwd username   # Change password
 userdel username  # Delete User
 su - username     # Switch user
 
+tmux                   # Start a new tmux session
+tmux new -s mysession  # Start session with name
+tmux ls                # List all sessions
+tmux attach -t mysession   # Attach to a session
+tmux kill-session -t mysession  # Kill a session
+exit                   # Exit shell inside tmux (ends pane/window)
+
+tmux new -s project      # Start new session "project"
+Ctrl+b c                 # Create a new window
+Ctrl+b %                 # Split pane vertically
+Ctrl+b "                 # Split pane horizontally
+Ctrl+b o                 # Switch between panes
+Ctrl+b d                 # Detach (session keeps running)
+tmux attach -t project   # Reattach later
 
 
+alias ..="cd .."
+alias ...="cd ../.."
+alias update="sudo apt update && sudo apt upgrade -y"
+alias gs="git status"
+alias gp="git pull"
+alias dc="docker-compose"
+alias v="vim"
+alias n="nano"
