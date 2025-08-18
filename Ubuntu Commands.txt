@@ -22,7 +22,8 @@ rm file.txt        # Delete file
 touch file.txt     # Create empty file
 cp file1 file2     # Copy file
 cp -r dir1 dir2    # Copy directory
-mv file1 newname   # Rename/move file or       mv file1 folder/file1
+mv file1 newname   # Rename/move file or       
+mv file1 folder/file1
 
 
 vim main.py         # terminal editor (to create and manipulate files)
@@ -175,3 +176,30 @@ alias gp="git pull"
 alias dc="docker-compose"
 alias v="vim"
 alias n="nano"
+
+
+ls > files.txt        # Save output to file (overwrite)
+ls >> files.txt       # Append output to file
+ls 2> errors.txt      # Redirect errors
+command > out.txt 2>&1   # Redirect both output and error
+
+
+cat /etc/passwd | grep "/bin/bash" | cut -d: -f1 > users.txt
+👉 Extracts all usernames with bash shell and saves to users.txt.
+
+
+
+find . -type f -name "*.log" | xargs grep "ERROR"
+👉 Find all .log files and search for “ERROR” inside them.
+
+
+
+“List only .py files and count them.”
+
+ls *.py | wc -l
+
+
+“Find processes containing nginx and kill them.”
+
+ps aux | grep nginx | awk '{print $2}' | xargs kill -9
+
