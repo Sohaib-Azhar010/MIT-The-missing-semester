@@ -2,6 +2,7 @@ ls                 # to show the list of items in current directory
 ls -l              # Detailed listing
 ls -a              # Show hidden files
 ls -lart           # to get info about permissions
+ls -lh
 
 
 
@@ -54,19 +55,21 @@ Ctrl + U            # Paste line
 Ctrl + W            # Search
 
 
-cat file.txt       # View file content
-less file.txt      # View file page by page
-head file.txt      # First 10 lines
-tail file.txt      # Last 10 lines
-tail -f logfile    # Watch live logs
+cat file.txt        # View file content
+less file.txt       # View file page by page
+head file.txt       # First 10 lines
+tail file.txt       # Last 10 lines
+tail -f logfile     # Watch live logs
 
-man ls             # to get all info about ls command
+man ls              # to get all info about ls command
 
 
-chmod              # Change permissions (rwxr-xr-x)
+chmod               # Change permissions (rwxr-xr-x)
   eg: chmod 744 file.txt 
 
-chown              # Change ownership
+chmod +x file       # makes file executable
+
+chown               # Change ownership
   eg: chown newuser file.txt
   eg: chown newuser:newgroup file.txt
 
@@ -78,7 +81,7 @@ sudo apt remove pkg_name       # Remove package
 dpkg -l                        # List installed packages
 
 
-tar                # create or extract compressed archieved files
+tar                 # create or extract compressed archieved files
 
 tar cf hello.tar hello.py main.py 
 
@@ -155,6 +158,17 @@ locate filename   # to find the file in directory
 sort filename     # will sort elements in the file
 uniq filename     # will give unique values from file
 
+sort -u -c alpha.txt
+Here’s what each flag means:
+sort → sorts the file.
+-u → removes duplicates (unique).
+-c → check only, don’t output sorted text. Instead, report if the file is sorted.
+
+
+sort -u alpha.txt -o alpha.txt
+This will sort the file, remove duplicates, and save back to alpha.txt.
+
+
 adduser newuser   # Add new user
 passwd username   # Change password
 userdel username  # Delete User
@@ -169,11 +183,14 @@ exit                   # Exit shell inside tmux (ends pane/window)
 
 tmux new -s project      # Start new session "project"
 Ctrl+b c                 # Create a new window
+Ctrl+b n                 # Switch between Windows
 Ctrl+b %                 # Split pane vertically
 Ctrl+b "                 # Split pane horizontally
 Ctrl+b o                 # Switch between panes
 Ctrl+b d                 # Detach (session keeps running)
-tmux attach -t project   # Reattach later
+Ctrl+b ,                 # Rename the Window
+Ctrl+b w                 # List of Everything
+tmux a -t project   # Reattach later
 
 
 alias ..="cd .."
@@ -199,6 +216,10 @@ ls > files.txt        # Save output to file (overwrite)
 ls >> files.txt       # Append output to file
 ls 2> errors.txt      # Redirect errors
 command > out.txt 2>&1   # Redirect both output and error
+
+
+cmp  # compare file
+diff # diff bw 2 files
 
 
 cat /etc/passwd | grep "/bin/bash" | cut -d: -f1 > users.txt
@@ -318,3 +339,102 @@ sort alpha.txt | uniq
 sort -u alpha.txt
 
 history | awk '{$1="";print substr($0,2)}' | sort | uniq -c | sort -n | tail -n 10
+
+
+Git command-line interface
+To avoid duplicating information, we’re not going to explain the commands below in detail. See the highly recommended Pro Git for more information, or watch the lecture video.
+
+Basics
+git help <command>: get help for a git command
+git init: creates a new git repo, with data stored in the .git directory
+git status: tells you what’s going on
+git add <filename>: adds files to staging area
+git commit: creates a new commit
+
+
+Write good commit messages!
+Even more reasons to write good commit messages!
+git log: shows a flattened log of history
+git log --all --graph --decorate: visualizes history as a DAG
+git diff <filename>: show changes you made relative to the staging area
+git diff <revision> <filename>: shows differences in a file between snapshots
+git checkout <revision>: updates HEAD (and current branch if checking out a branch)
+
+
+Branching and merging
+git branch: shows branches
+git branch <name>: creates a branch
+git checkout -b <name>: creates a branch and switches to it
+same as git branch <name>; git checkout <name>
+git merge <revision>: merges into current branch
+git mergetool: use a fancy tool to help resolve merge conflicts
+git rebase: rebase set of patches onto a new base
+
+
+Remotes
+git remote: list remotes
+git remote add <name> <url>: add a remote
+git push <remote> <local branch>:<remote branch>: send objects to remote, and update remote reference
+git branch --set-upstream-to=<remote>/<remote branch>: set up correspondence between local and remote branch
+git fetch: retrieve objects/references from a remote
+git pull: same as git fetch; git merge
+git clone: download repository from remote
+
+
+Undo
+git commit --amend: edit a commit’s contents/message
+git reset HEAD <file>: unstage a file
+git checkout -- <file>: discard changes
+
+
+Advanced Git
+git config: Git is highly customizable
+git clone --depth=1: shallow clone, without entire version history
+git add -p: interactive staging
+git rebase -i: interactive rebasing
+git blame: show who last edited which line
+git stash: temporarily remove modifications to working directory
+git bisect: binary search history (e.g. for regressions)
+.gitignore: specify intentionally untracked files to ignore
+
+
+
+Event Profiling
+As it was the case for strace for debugging, you might want to ignore the specifics of the code that you are running and treat it like a black box when profiling. The perf command abstracts CPU differences away and does not report time or memory, but instead it reports system events related to your programs. For example, perf can easily report poor cache locality, high amounts of page faults or livelocks. Here is an overview of the command:
+
+perf list - List the events that can be traced with perf
+perf stat COMMAND ARG1 ARG2 - Gets counts of different events related to a process or command
+perf record COMMAND ARG1 ARG2 - Records the run of a command and saves the statistical data into a file called perf.data
+perf report - Formats and prints the data collected in perf.data
+
+
+==========
+Review Meta Programming Lecture 
+==========
+
+$ printf 'hello' | sha1sum
+aaf4c61ddcc5e8a2dabede0f3b482cd9aea9434d
+$ printf 'Hello' | sha1sum 
+f7ff9e8b7bb2e09b70935a5d785e0cc5d9d0abf0
+
+----------------------------------------
+Symmetric cryptography
+keygen() -> key  (this function is randomized)
+
+encrypt(plaintext: array<byte>, key) -> array<byte>  (the ciphertext)
+decrypt(ciphertext: array<byte>, key) -> array<byte>  (the plaintext)
+
+
+--------------------------------------------
+
+Asymmetric cryptography
+The term “asymmetric” refers to there being two keys, with two different roles. A private key, as its name implies, is meant to be kept private, while the public key can be publicly shared and it won’t affect security (unlike sharing the key in a symmetric cryptosystem). Asymmetric cryptosystems provide the following set of functionality, to encrypt/decrypt and to sign/verify:
+
+keygen() -> (public key, private key)  (this function is randomized)
+
+encrypt(plaintext: array<byte>, public key) -> array<byte>  (the ciphertext)
+decrypt(ciphertext: array<byte>, private key) -> array<byte>  (the plaintext)
+
+sign(message: array<byte>, private key) -> array<byte>  (the signature)
+verify(message: array<byte>, signature: array<byte>, public key) -> bool  (whether or not the signature is valid)
+
